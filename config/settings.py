@@ -68,7 +68,7 @@ SPECTACULAR_SETTINGS = {
 # https://docs.djangoproject.com/en/4.2/topics/cache/#redis
 # https://github.com/jazzband/django-redis
 
-CACHE_ENABLED = os.getenv('CACHE_ENABLED') == 'True'
+CACHE_ENABLED = os.getenv("CACHE_ENABLED") == "True"
 
 if CACHE_ENABLED:
     CACHES = {
@@ -122,6 +122,8 @@ DATABASES = {
         "NAME": os.getenv("DB_NAME"),
         "USER": "postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 
