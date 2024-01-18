@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from user_selection.apps import UserSelectionConfig
 from user_selection.views import UserCreateAPIView
@@ -8,5 +9,5 @@ app_name = UserSelectionConfig.name
 
 urlpatterns = [
     path("create/", UserCreateAPIView.as_view(), name="user_create"),
-    path("<int:pk>/", UserDetailAPIView.as_view(), name="user_detail"),
+    path("<int:pk>/", cache_page(60)(UserDetailAPIView.as_view()), name="user_detail"),
 ]
