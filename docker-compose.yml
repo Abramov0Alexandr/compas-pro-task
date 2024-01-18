@@ -7,6 +7,7 @@ services:
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -23,10 +24,9 @@ services:
     env_file:
       - .env
     tty: true
-    command: >
-      && python manage.py makemigrations
+    command: bash -c "python manage.py makemigrations
       && python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000
+      && python manage.py runserver 0.0.0.0:8000"
 
     volumes:
       - media:/docker_code/media/
