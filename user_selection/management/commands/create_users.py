@@ -7,6 +7,11 @@ from user_selection.models import User
 
 
 class Command(BaseCommand):
+    """
+    A custom command to create users of each role type.
+    Also for each user will set the default avatar.
+    """
+
     help = "A custom command to create users of each role type"
 
     def handle(self, *args, **options):
