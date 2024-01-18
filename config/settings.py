@@ -40,9 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
-
+    "django_extensions",
     "user_selection.apps.UserSelectionConfig",
 ]
 
@@ -120,6 +119,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Shell Plus configuration options
+# https://django-extensions.readthedocs.io/en/latest/shell_plus.html#configuration
+
+SHELL_PLUS_PRINT_SQL = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -131,4 +134,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'user_selection.User'
+# Substituting a custom User model
+# https://docs.djangoproject.com/en/4.2/topics/auth/customizing/
+
+AUTH_USER_MODEL = "user_selection.User"
