@@ -3,6 +3,10 @@ from django.contrib.auth.models import UserManager
 
 
 class CustomUserManager(UserManager):
+    """
+    Custom user manager fo user and superuser creation.
+    """
+
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):

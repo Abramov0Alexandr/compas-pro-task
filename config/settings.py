@@ -42,8 +42,45 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_extensions",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
     "user_selection.apps.UserSelectionConfig",
 ]
+
+# Register spectacular AutoSchema with DRF.
+# https://drf-spectacular.readthedocs.io/en/latest/readme.html#installation
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": '"Compas PRO" user selection project',
+    "DESCRIPTION": "Test task for Compas PRO",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+}
+
+# Setting up the cache
+# https://docs.djangoproject.com/en/4.2/topics/cache/#redis
+# https://github.com/jazzband/django-redis
+
+CACHE_ENABLED = os.getenv('CACHE_ENABLED') == 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+            "TIMEOUT": 300,
+        }
+    }
+# Configure as session backend
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

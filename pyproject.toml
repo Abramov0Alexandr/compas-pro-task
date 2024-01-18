@@ -17,6 +17,8 @@ psycopg = {extras = ["binary"], version = "^3.1.17"}
 pillow = "^10.2.0"
 django-extensions = "^3.2.3"
 ipython = "^8.20.0"
+drf-spectacular = {extras = ["sidecar"], version = "^0.27.0"}
+django-redis = "^5.4.0"
 
 
 [tool.poetry.group.linters.dependencies]
