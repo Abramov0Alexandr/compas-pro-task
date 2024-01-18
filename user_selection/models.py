@@ -1,4 +1,5 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 from user_selection.services import user_avatar_upload_path
@@ -7,13 +8,15 @@ from user_selection.user_manager import CustomUserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     USER_ROLE_CHOICE = {
-        'user': 'Пользователь',
-        'manager': 'Менеджер',
-        'crm-admin': 'CRM-администратор',
+        "user": "Пользователь",
+        "manager": "Менеджер",
+        "crm-admin": "CRM-администратор",
     }
 
     email = models.EmailField(unique=True)
-    role_choice = models.CharField(max_length=20, choices=USER_ROLE_CHOICE, default='user')
+    role_choice = models.CharField(
+        max_length=20, choices=USER_ROLE_CHOICE, default="user"
+    )
     offer = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to=user_avatar_upload_path, blank=True, null=True)
 
@@ -26,11 +29,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return f'{self.email}: {self.role_choice} {self.offer}'
+        return f"{self.email}: {self.role_choice} {self.offer}"
 
     @property
     def is_staff(self):
         return self.is_superuser
 
     class Meta:
-        ordering = ('pk',)
+        ordering = ("pk",)
