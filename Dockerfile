@@ -7,4 +7,3 @@ COPY requirements.txt pyproject.toml poetry.lock /docker_code/
 RUN pip install --upgrade pip && pip install --require-hashes --no-deps -r requirements.txt
 
 COPY . .
-
