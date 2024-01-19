@@ -118,7 +118,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # If you're going to start project as docker container, select "True" else set "False".
 # RUN_AS_DOCKER_IMAGE = True
-RUN_AS_DOCKER_IMAGE = False
+RUN_AS_DOCKER_CONTAINER = False
 
 DATABASES = {
     "default": {
@@ -126,7 +126,7 @@ DATABASES = {
         "NAME": os.getenv("DB_NAME"),
         "USER": "postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "db" if RUN_AS_DOCKER_IMAGE else "127.0.0.1",
+        "HOST": "db" if RUN_AS_DOCKER_CONTAINER else "127.0.0.1",
         "PORT": "5432",
     }
 }
