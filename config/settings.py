@@ -116,13 +116,17 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# If you're going to start project as docker container, select "True" else set "False".
+# RUN_AS_DOCKER_IMAGE = True
+RUN_AS_DOCKER_IMAGE = False
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME"),
         "USER": "postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "db",
+        "HOST": "db" if RUN_AS_DOCKER_IMAGE else "127.0.0.1",
         "PORT": "5432",
     }
 }
